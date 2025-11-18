@@ -7,13 +7,11 @@
     "terminal.background": "#F8F8F8"
   },
   "workbench.colorCustomizations": /*dark*/ {
-    "titleBar.activeBackground": "#006478",
-    "titleBar.inactiveBackground": "#006478",
-    "tab.inactiveBackground": "#006478",
+    "titleBar.activeBackground": "#404050",
+    "titleBar.inactiveBackground": "#404050",
+    "tab.inactiveBackground": "#404050",
     "tab.inactiveForeground": "#FFFFFFD0",
     "tab.activeBackground": "#000",
-    "sideBar.background": "#203040",
-    "terminal.background": "#203040"
   },
   "window.title": "${dirty}${rootName} • ${activeEditorShort}",
   "terminal.integrated.cursorBlinking": true,
