@@ -1,5 +1,5 @@
 <script>
-	import favicon from '$lib/images/favicon.png';
+	import favicon from '$lib/images/Logo.webp';
 
 	let { children } = $props();
 </script>
@@ -15,7 +15,7 @@
 		body {
 			margin: 0;
 			overflow: hidden;
-			--background: #202020;
+			--background: #000000;
 			background: var(--background);
 			color: white;
 		}

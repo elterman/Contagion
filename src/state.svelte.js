@@ -1,6 +1,6 @@
 export const ss = $state({
-    fobs: [],
     dlg: true,
+    size: 4,
 });
 
 export const _stats = $state({

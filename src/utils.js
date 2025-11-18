@@ -1,4 +1,3 @@
-import { PI_OVER_180 } from './const';
 
 export const windowSize = () => {
     const d = document,
@@ -56,43 +55,3 @@ export const post = (fn, ms) => setTimeout(fn, ms);
 
 export const range = (n) => [...Array(n + 1).keys()].slice(1);
 
-export const sameFob = (f1, f2) => f1.id === f2.id;
-
-export const bounceAngle = (fob, other) => {
-    const a = Math.atan2(other.cy - fob.cy, other.cx - fob.cx) / PI_OVER_180;
-    const deg = Math.atan2(fob.vel.y, fob.vel.x) / PI_OVER_180;
-    return (180 - deg - a * 2) % 360;
-};
-
-export const overlap = (rob1, rob2) => {
-    return Math.hypot(rob1.cx - rob2.cx, rob1.cy - rob2.cy) < rob1.radius + rob2.radius;
-};
-
-// Usage with collision
-export const handleCollision = (fob1, fob2) => {
-    const dx = fob2.cx - fob1.cx;
-    const dy = fob2.cy - fob1.cy;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    // Normal vector
-    const nx = dx / distance;
-    const ny = dy / distance;
-
-    const reflectVelocity = (velocity, normalVector) => {
-        // velocity and normalVector are { x, y }
-        // Formula: v_reflected = v - 2(v·n)n
-
-        const dotProduct = velocity.x * normalVector.x + velocity.y * normalVector.y;
-
-        return {
-            x: velocity.x - 2 * dotProduct * normalVector.x,
-            y: velocity.y - 2 * dotProduct * normalVector.y
-        };
-    };
-
-    // Reflect velocities
-    const v1 = reflectVelocity(fob1.vel, { x: nx, y: ny });
-    const v2 = reflectVelocity(fob2.vel, { x: -nx, y: -ny });
-
-    return { v1, v2 };
-};
