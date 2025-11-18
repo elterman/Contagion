@@ -132,11 +132,11 @@ const onTick = () => {
                 continue;
             }
 
-            if (isZet(fob1) || isZet(fob2)) {
+            if (isZet(fob1) || isZet(fob2) || fob1.dead || fob2.dead) {
                 shake();
 
                 if (isPet(fob1) || isPet(fob2)) {
-                    // TODO
+                    (isPet(fob1) ? fob1 : fob2).dead = true;
                 }
             }
 
