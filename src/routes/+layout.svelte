@@ -18,7 +18,7 @@
 			--background: #000;
 			background: var(--background);
 			color: white;
-			font-family: Quicksand;
+			font-family: DMSans;
 		}
 
 		.no-highlight {

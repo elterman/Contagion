@@ -216,8 +216,8 @@
 	}
 
 	@font-face {
-		font-family: Quicksand;
-		src: url('$lib/fonts/Quicksand.ttf');
+		font-family: DMSans;
+		src: url('$lib/fonts/DMSans.ttf');
 	}
 
 	@font-face {

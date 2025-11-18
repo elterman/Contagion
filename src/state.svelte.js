@@ -1,4 +1,4 @@
-import { DLG_INSTR, PROMPT_TRANSITION } from './const';
+import { PROMPT_TRANSITION } from './const';
 import { showDialog } from './shared.svelte';
 import { post } from './utils';
 
@@ -21,7 +21,7 @@ export const _prompt = $state({
         post(() => _prompt.id = null, PROMPT_TRANSITION);
 
         if (plop && !ss.over && ss.flies.length === 0) {
-            post(() => showDialog(DLG_INSTR, plop));
+            post(() => showDialog(true, plop));
         }
     },
 

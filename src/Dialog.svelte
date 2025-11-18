@@ -6,15 +6,15 @@
 	const li = '<li style="margin: 12px 0 0 -20px; color: var(--orange);">';
 
 	const CONTENT = `
-        <span style='font-style: italic;'>You are a self-aware zombie kitten drifting through space, trying not to infect the innocent. Every touch spreads the plague—keep at least one kitten alive.</span>
+        <span style='font-style: italic;'>You are a self-aware zombie kitten drifting through space, trying to delay the inevitable and avoid infecting the innocent.</span>
         ${ul}
-        ${li}<span>Use arrow keys adjust your velocity—horizontal or vertical.  Speed increases are capped.</span></li>
+        ${li}<span>Use arrow keys to adjust your velocity—horizontal or vertical.  Speed increases are capped.</span></li>
         ${li}<span>Touching a live kitten temporarily turns it into a zombie.</span></li>
-        ${li}<span>Zombie kittens spread the infection.</span></li>
+        ${li}<span>Zombie kittens spread the plague.</span></li>
         ${li}<span>Keep at least one kitten alive.</span></li>
         </ul>`;
 
-	const width = $derived(ss.space?.width > 660 ? '620px' : '80%');
+	const width = $derived(ss.space?.width > 580 ? '540px' : '80%');
 	const style = $derived(`width: ${width}; font-size: ${Math.min(24, 30 * Math.min(ss.scale, 1))}px;`);
 </script>
 
@@ -37,7 +37,7 @@
 	}
 
 	.content {
-		font-weight: bold;
+		/* font-weight: bold; */
 		display: grid;
 		align-content: start;
 		place-self: center;

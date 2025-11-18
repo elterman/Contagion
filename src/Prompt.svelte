@@ -4,7 +4,7 @@
 
 	const LAUNCH = $derived('<span>press  SPACE  to launch</span>');
 	const RESTART = $derived('<span>press  SPACE  to re-launch</span>');
-	const DISMISS = $derived('<span style=\'font-family: Quicksand;\'>press  ESC  to dismiss</span>');
+	const DISMISS = $derived('<span style=\'font-family: DMSans;\'>press  ESC  to dismiss</span>');
 	const style = $derived(`font-size: ${Math.min(24, 30 * Math.min(ss.scale, 1))}px;`);
 </script>
 
