@@ -69,7 +69,7 @@ const hitEdge = (fob) => {
     }
 
     if (y + fob.radius >= ss.space.height) {
-        return fob.vel.y < 0 ? 0 :  3;
+        return fob.vel.y < 0 ? 0 : 3;
     }
 
     return 0;
@@ -90,6 +90,17 @@ const onTick = () => {
 
     for (const fob of ss.fobs) {
         if (!isZet(fob)) {
+            let { x, y } = fob.vel;
+
+            if ((ss.ticks * TICK_MS) % 1000 === 0) {
+                x *= 1.15;
+                y *= 1.15;
+
+                if (Math.abs(x) + Math.abs(y) <= PET_VELOCITY) {
+                    fob.vel = { x, y };
+                }
+            }
+
             fob.cx += fob.vel.x;
             fob.cy += fob.vel.y;
 
@@ -221,7 +232,7 @@ const addZet = () => {
     const width = ss.space.width - radius * 2;
     const height = ss.space.height - radius * 2;
 
-    const elon = { id: 'zet', cx: random(width) + radius, cy: random(height) + radius, radius, vel: { x: 0, y: 0 }, ticks: 0, dead: true };
+    const elon = { id: 'zet', cx: random(width) + radius, cy: random(height) + radius, radius, vel: { x: 0, y: 0 }, dead: true };
     ss.fobs.push(elon);
 };
 
@@ -232,7 +243,7 @@ const addPets = () => {
     const height = ss.space.height - radius * 2;
 
     for (let i = 0; i < ss.pet_count; i++) {
-        ss.fobs.push({ id: `pet-${i + 1}`, cx: random(width) + radius, cy: random(height) + radius, radius, vel: makeVelocity(PET_VELOCITY), ticks: 0 });
+        ss.fobs.push({ id: `pet-${i + 1}`, cx: random(width) + radius, cy: random(height) + radius, radius, vel: makeVelocity(PET_VELOCITY * 0.1) });
     }
 };
 
