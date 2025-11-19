@@ -3,7 +3,7 @@
 	import { ss } from './state.svelte';
 
 	const ul = '<ul style="margin: 25px 0 0 0;">';
-	const li = '<li style="margin: 12px 0 0 -20px; color: var(--orange);">';
+	const li = '<li style="margin: 12px 0 0 -20px;">';
 
 	const CONTENT = `
         <span style='font-style: italic;'>You are a self-aware zombie kitten drifting through space, trying not to infect the innocent. The inevitable cannot be stopped—but it can be delayed.</span>

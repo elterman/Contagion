@@ -57,19 +57,19 @@ const hitEdge = (fob) => {
     const y = fob.cy;
 
     if (x - fob.radius <= 0) {
-        return 4;
+        return fob.vel.x > 0 ? 0 : 4;
     }
 
     if (x + fob.radius >= ss.space.width) {
-        return 2;
+        return fob.vel.x < 0 ? 0 : 2;
     }
 
     if (y - fob.radius <= 0) {
-        return 1;
+        return fob.vel.y > 0 ? 0 : 1;
     }
 
     if (y + fob.radius >= ss.space.height) {
-        return 3;
+        return fob.vel.y < 0 ? 0 :  3;
     }
 
     return 0;
@@ -140,7 +140,7 @@ const onTick = () => {
 
             const check = (zob, fob) => {
                 if (isPet(fob) && !fob.dead) {
-                    _sound.play('lost', { rate: 2 });
+                    _sound.play('lost', { rate: isZet(zob) ? 2 : 3 });
                     shake(fob);
                     fob.dead = isPet(zob) ? ss.ticks : true;
 

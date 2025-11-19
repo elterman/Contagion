@@ -174,7 +174,7 @@
 	post(() => (splash = false), 2000);
 </script>
 
-<div class="app pulse">
+<div class="app">
 	<GamePage />
 	{#if splash}
 		<Splash />
@@ -184,7 +184,7 @@
 <style>
 	.app {
 		display: grid;
-		height: 100dvh;
+		height: calc(100dvh - 4px);
 		-webkit-user-select: none;
 		user-select: none;
 		overflow: hidden;
@@ -194,7 +194,6 @@
 		background-position-x: center;
 		background-position-y: center; */
 		box-sizing: border-box;
-		/* border: 1px solid yellow; */
 	}
 
 	.pulse {

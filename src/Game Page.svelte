@@ -25,6 +25,5 @@
 			1px -1px black,
 			-1px -1px black,
 			-1px 1px black;
-		/* text-shadow: none; */
 	}
 </style>

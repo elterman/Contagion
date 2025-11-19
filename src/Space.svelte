@@ -38,7 +38,6 @@
 		display: grid;
 		transition: opacity 1s;
 		box-sizing: border-box;
-		/* border: 10px solid var(--lightblue); */
 	}
 
 	.inner-space {

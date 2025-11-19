@@ -49,12 +49,10 @@
 	}
 
 	.label {
-		color: var(--lightblue);
 		font-family: Orbitron;
 	}
 
 	.flow {
-		color: var(--lightgreen);
 		font-family: Radhiumz;
 		translate: 0 7%;
 	}
