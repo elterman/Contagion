@@ -153,7 +153,7 @@ const onTick = () => {
                 if (isPet(fob) && !fob.dead) {
                     shake(fob);
                     fob.dead = ss.ticks;
-                    fob.lives -= 1;
+                    // fob.lives -= 1;
 
                     _sound.play('lost', { rate: fob.lives ? 3 : 2 });
 

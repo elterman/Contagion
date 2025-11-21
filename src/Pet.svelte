@@ -1,7 +1,7 @@
 <script>
 	import pet from '$lib/images/Pet.webp';
 	import petDead from '$lib/images/Pet Dead.webp';
-	import petSick from '$lib/images/Pet Sick.webp';
+	// import petSick from '$lib/images/Pet Sick.webp';
 	import Fob from './Fob.svelte';
 	import { ss } from './state.svelte';
 
@@ -10,4 +10,4 @@
 	let fob = $derived(ss.fobs[i + index]);
 </script>
 
-<Fob bind:fob={fob} src={fob.dead ? (fob.lives ? petSick : petDead) : pet} />
+<Fob bind:fob={fob} src={fob.dead ? (fob.lives ? petDead : petDead) : pet} />

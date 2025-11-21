@@ -6,7 +6,7 @@
 	const orange = '<span style="font-weight: bold;">';
 	const PAUSE = `<span>pause/instructions  ${orange}ESC</span></span>`;
 	const TOOLS = $derived(
-		`<span>sfx ${_sound.sfx ? 'on' : 'off'}  ${orange}S</span>   music ${_sound.music ? 'on' : 'off'}  ${orange}M</span>   reset stats  ${orange}Z</span></span>`
+		`<span>sfx ${_sound.sfx ? 'on' : 'off'}  ${orange}S</span>   music ${_sound.music ? 'on' : 'off'}  ${orange}M</span></span>`
 	);
 	const style = $derived(`font-size: ${Math.min(20, 22 * Math.min(ss.scale, 1))}px;`);
 </script>

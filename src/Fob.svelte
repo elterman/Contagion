@@ -16,9 +16,6 @@
 <div class="fob" {style} transition:fade={{ duration: ss.over ? 500 : 0 }}>
 	<div class="shakeable {fob.shake ? 'shake' : ''}">
 		<div class="rotatable {fob.dead ? '' : 'alive'}" style="animation-delay: {random(0, 1)}s;">
-			{#if fob.lives}
-				<div class="lives" style="font-size: {13 * Math.min(ss.scale, 1)}px;">{fob.lives || ''}</div>
-			{/if}
 			<img {src} alt="" />
 		</div>
 	</div>
@@ -41,15 +38,6 @@
 
 	.rotatable {
 		display: grid;
-	}
-
-	.lives {
-		grid-area: 1/1;
-		place-self: start center;
-		z-index: 1;
-		background: black;
-		border-radius: 50%;
-		padding: 5%;
 	}
 
 	img {

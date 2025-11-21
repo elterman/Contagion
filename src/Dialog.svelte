@@ -6,13 +6,13 @@
 	const li = '<li style="margin: 12px 0 0 -20px;">';
 
 	const CONTENT = `
-        <span style='font-style: italic;'>You are a self-aware zombie kitten drifting through space, trying not to infect the innocent. The inevitable cannot be stopped—but it can be delayed.</span>
+        <span style='font-style: italic;'>You are a self-aware zombie doomed to drift through space, trying not to infect the innocent.</span>
         ${ul}
-        ${li}<span>Use arrow keys to adjust your velocity—horizontal and vertical.  Speed increases are capped.</span></li>
+        ${li}<span>Use arrow keys to adjust your velocity—horizontal and vertical. Speed increases are capped.</span></li>
         ${li}<span>Touching a live kitten turns it into a zombie.</span></li>
         ${li}<span>Zombie kittens spread the plague.</span></li>
-        ${li}<span>A zombie kitten revives after a short time—unless its 9 lives are spent.</span></li>
-        ${li}<span>It's over when no lives remain.</span></li>
+        ${li}<span>After a short time, zombie kittens revive and can be infected again.</span></li>
+        ${li}<span>Keep all 10 kittens alive at the same time—for as long as possible.</span></li>
         </ul>`;
 
 	const width = $derived(ss.space?.width > 580 ? '540px' : '80%');
