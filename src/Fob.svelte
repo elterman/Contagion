@@ -13,7 +13,7 @@
 	);
 </script>
 
-<div class="fob" {style} transition:fade={{ duration: ss.over ? 500 : 0 }}>
+<div class="fob bg" {style} transition:fade={{ duration: ss.over ? 500 : 0 }}>
 	<div class="shakeable {fob.shake ? 'shake' : ''}">
 		<div class="rotatable {fob.dead ? '' : 'alive'}" style="animation-delay: {random(0, 1)}s;">
 			<img {src} alt="" />
@@ -79,5 +79,9 @@
 		to {
 			transform: rotate(30deg);
 		}
+	}
+
+	.bg {
+		background-image: url('$lib/images/Bg.webp');
 	}
 </style>
