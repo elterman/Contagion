@@ -157,30 +157,26 @@ const onTick = () => {
                 continue;
             }
 
-            const checkDied = (zob, fob) => {
-                if (isPet(fob) && !fob.dead) {
-                    shake(fob);
+            if (!!fob1.dead !== !!fob2.dead) {
+                _sound.play('lost', { rate: 2 });
 
-                    if (isZet(zob)) {
-                        shake(zob);
-                    }
+                shake(fob1);
+                shake(fob2);
 
-                    if (liveCount() === PET_COUNT) {
-                        _stats.last_streak = ss.streak_ticks;
-                        persist();
-                    }
-
-                    fob.dead = ss.ticks;
-                    ss.streak_ticks = 0;
-
-                    _sound.play('lost', { rate: 2 });
+                if (liveCount() === PET_COUNT) {
+                    _stats.last_streak = ss.streak_ticks;
+                    persist();
                 }
-            };
 
-            if (isZet(fob1) || fob1.dead) {
-                checkDied(fob1, fob2);
-            } else if (isZet(fob2) || fob2.dead) {
-                checkDied(fob2, fob1);
+                if (!fob1.dead) {
+                    fob1.dead = ss.ticks;
+                }
+
+                if (!fob2.dead) {
+                    fob2.dead = ss.ticks;
+                }
+
+                ss.streak_ticks = 0;
             }
 
             const { v1, v2 } = handleCollision(fob1, fob2);
