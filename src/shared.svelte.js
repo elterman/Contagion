@@ -2,7 +2,7 @@ import { isNumber, random } from 'lodash-es';
 import { APP_KEY, DEAD_MS, PET_COUNT, PET_RADIUS, PET_VELOCITY, TICK_MS, ZET_RADIUS } from './const';
 import { _sound } from './sound.svelte';
 import { _prompt, _stats, ss } from './state.svelte';
-import { clientRect, handleCollision, isPet, isZet, overlap, post } from './utils';
+import { clientRect, handleCollision, isZet, overlap, post } from './utils';
 
 export const _log = (value) => console.log($state.snapshot(value));
 

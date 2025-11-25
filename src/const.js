@@ -7,5 +7,6 @@ export const DEAD_MS = 5000;
 export const ZET_RADIUS = 35;
 export const PET_RADIUS = 35;
 export const ZET_MAX_VELOCITY = 3;
+export const ZET_VELOCITY_DELTA = 0.5;
 export const PET_VELOCITY = 3.7;
 export const PET_COUNT = 10;
