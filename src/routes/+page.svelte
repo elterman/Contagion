@@ -1,5 +1,5 @@
 <script>
-	import { ZET_MAX_VELOCITY } from '../const';
+	import { ZET_MAX_VELOCITY, ZET_VELOCITY_DELTA } from '../const';
 	import GamePage from '../Game Page.svelte';
 	import { findZet, onStart, persist } from '../shared.svelte';
 	import { _sound } from '../sound.svelte';
@@ -98,7 +98,7 @@
 		let { x, y } = zet.vel;
 
 		const max = ZET_MAX_VELOCITY * ss.scale;
-		const d = 0.5 * ss.scale;
+		const d = ZET_VELOCITY_DELTA * ss.scale;
 
 		switch (e.key) {
 			default:

@@ -2,7 +2,7 @@ import { isNumber, random } from 'lodash-es';
 import { APP_KEY, DEAD_MS, PET_COUNT, PET_RADIUS, PET_VELOCITY, TICK_MS, ZET_RADIUS } from './const';
 import { _sound } from './sound.svelte';
 import { _prompt, _stats, ss } from './state.svelte';
-import { clientRect, handleCollision, isPet, isZet, overlap, post } from './utils';
+import { clientRect, handleCollision, isZet, overlap, post } from './utils';
 
 export const _log = (value) => console.log($state.snapshot(value));
 
@@ -180,6 +180,13 @@ const onTick = () => {
             }
 
             const { v1, v2 } = handleCollision(fob1, fob2);
+
+            for (const fob of [fob1, fob2]) {
+                if (isZet(fob)) {
+                    v1.x = Math.round((v1.x.toFixed(1) * 2)) / 2;
+                    v1.y = Math.round((v1.y.toFixed(1) * 2)) / 2;
+                }
+            }
 
             fob1.vel = v1;
             fob2.vel = v2;

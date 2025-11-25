@@ -3,6 +3,7 @@
 	import { ss } from './state.svelte';
 	import { isZet } from './utils';
 	import { random } from 'lodash-es';
+	import { ZET_VELOCITY_DELTA } from './const';
 
 	const { fob, src, scale = 1 } = $props();
 	const { cx, cy, radius } = $derived(fob);
@@ -19,6 +20,24 @@
 			<img {src} alt="" />
 		</div>
 	</div>
+	{#if isZet(fob)}
+		{@const { x, y } = fob.vel}
+		<!-- <div class="vel" style="width: ${w}px; translate: {x < 0 ? off : -off}px 0;">{Math.abs(x).toFixed(1)}</div> -->
+		<!-- <div class="vel" style="width: ${w}px; translate: 0 {y < 0 ? off : -off}px;">{Math.abs(y).toFixed(1)}</div> -->
+		{#each [1, 2, 3, 4, 5, 6] as i}
+			{@const threshold = i * ZET_VELOCITY_DELTA * ss.scale}
+			{@const w = radius * 1 * (1 - i * 0.12)}
+			{@const off = 4 * (i + 1)}
+			{#if Math.abs(x).toFixed(1) >= threshold}
+				{@const cls = x < 0 ? 'wave-x-r' : 'wave-x-l'}
+				<div class={cls} style="width: {w}px; translate: {off * (x < 0 ? 1 : -1)}px 0;"></div>
+			{/if}
+			{#if Math.abs(y).toFixed(1) >= threshold}
+				{@const cls = y < 0 ? 'wave-y-b' : 'wave-y-t'}
+				<div class={cls} style="width: {w}px; translate: 0 {off * (y < 0 ? 1 : -1)}px;"></div>
+			{/if}
+		{/each}
+	{/if}
 </div>
 
 <style>
@@ -83,5 +102,50 @@
 
 	.bg {
 		background-image: url('$lib/images/Bg.webp');
+	}
+
+	.vel {
+		grid-area: 1/1;
+		place-self: center;
+		font-size: 18px;
+		text-shadow:
+			1px 1px black,
+			1px -1px black,
+			-1px -1px black,
+			-1px 1px black;
+		display: grid;
+		place-content: center;
+	}
+
+	.wave-x-l,
+	.wave-x-r,
+	.wave-y-t,
+	.wave-y-b {
+		grid-area: 1/1;
+		place-self: center;
+		display: grid;
+		border: 1px solid transparent;
+		border-radius: 50%;
+		aspect-ratio: 1;
+	}
+
+	.wave-x-l {
+		justify-self: start;
+		border-left-color: white;
+	}
+
+	.wave-x-r {
+		justify-self: end;
+		border-right-color: white;
+	}
+
+	.wave-y-t {
+		align-self: start;
+		border-top-color: white;
+	}
+
+	.wave-y-b {
+		align-self: end;
+		border-bottom-color: white;
 	}
 </style>
