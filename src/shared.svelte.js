@@ -75,6 +75,20 @@ const hitEdge = (fob) => {
     return 0;
 };
 
+const onOver = () => {
+    ss.over = true;
+
+    _sound.play('lost');
+    clearInterval(ss.timer);
+    delete ss.timer;
+
+    if (_stats.best_ticks === 0 || ss.ticks < _stats.best_ticks) {
+        _stats.best_ticks = ss.ticks;
+        persist();
+    }
+
+};
+
 const onTick = () => {
     if (ss.dlg) {
         return;
@@ -82,13 +96,9 @@ const onTick = () => {
 
     ss.ticks += 1;
 
-    if (liveCount() === PET_COUNT) {
-        ss.streak_ticks += 1;
-
-        if (ss.streak_ticks > _stats.best_streak) {
-            _stats.best_streak = ss.streak_ticks;
-            persist();
-        }
+    if (liveCount() === 0) {
+        onOver();
+        return;
     }
 
     const zet = findZet();
@@ -99,21 +109,10 @@ const onTick = () => {
 
     for (const fob of ss.fobs) {
         if (!isZet(fob)) {
-            let { x, y } = fob.vel;
-
-            if ((ss.ticks * TICK_MS) % 1000 === 0) {
-                x *= 1.15;
-                y *= 1.15;
-
-                if (Math.abs(x) + Math.abs(y) <= PET_VELOCITY) {
-                    fob.vel = { x, y };
-                }
-            }
-
             fob.cx += fob.vel.x;
             fob.cy += fob.vel.y;
 
-            if (isNumber(fob.dead) && fob.lives > 0 && ((ss.ticks - fob.dead) * TICK_MS) >= DEAD_MS) {
+            if (isNumber(fob.dead) && ((ss.ticks - fob.dead) * TICK_MS) >= DEAD_MS) {
                 shake(fob);
                 delete fob.dead;
                 _sound.play('won', { rate: liveCount() < PET_COUNT ? 4 : 1 });
@@ -163,11 +162,6 @@ const onTick = () => {
                 shake(fob1);
                 shake(fob2);
 
-                if (liveCount() === PET_COUNT) {
-                    _stats.last_streak = ss.streak_ticks;
-                    persist();
-                }
-
                 if (!fob1.dead) {
                     fob1.dead = ss.ticks;
                 }
@@ -175,17 +169,13 @@ const onTick = () => {
                 if (!fob2.dead) {
                     fob2.dead = ss.ticks;
                 }
-
-                ss.streak_ticks = 0;
             }
 
             const { v1, v2 } = handleCollision(fob1, fob2);
 
-            for (const fob of [fob1, fob2]) {
-                if (isZet(fob)) {
-                    v1.x = Math.round((v1.x.toFixed(1) * 2)) / 2;
-                    v1.y = Math.round((v1.y.toFixed(1) * 2)) / 2;
-                }
+            if (isZet(fob1)) {
+                v1.x = Math.round((v1.x.toFixed(1) * 2)) / 2;
+                v1.y = Math.round((v1.y.toFixed(1) * 2)) / 2;
             }
 
             fob1.vel = v1;
@@ -215,12 +205,10 @@ export const loadGame = () => {
         _sound.sfx = job.sfx;
         _sound.music = job.music;
         _stats.plays = job.plays;
-        _stats.last_streak = job.last_streak;
-        _stats.best_streak = job.best_streak;
+        _stats.best_ticks = job.best_ticks;
     } else {
         _stats.plays = 0;
-        _stats.last_streak = 0;
-        _stats.best_streak = 0;
+        _stats.best_ticks = 0;
     }
 };
 
@@ -247,7 +235,7 @@ const addZet = () => {
     const width = ss.space.width - radius * 2;
     const height = ss.space.height - radius * 2;
 
-    const zet = { id: 'zet', cx: random(width) + radius, cy: random(height) + radius, radius, vel: { x: 0, y: 0 }, dead: true, lives: 0 };
+    const zet = { id: 'zet', cx: random(width) + radius, cy: random(height) + radius, radius, vel: { x: 0, y: 0 }, dead: true };
     ss.fobs.push(zet);
 };
 
@@ -258,7 +246,7 @@ const addPets = () => {
     const height = ss.space.height - radius * 2;
 
     for (let i = 0; i < PET_COUNT; i++) {
-        ss.fobs.push({ id: `pet-${i + 1}`, lives: 9, cx: random(width) + radius, cy: random(height) + radius, radius, vel: makeVelocity(PET_VELOCITY * 0.1) });
+        ss.fobs.push({ id: `pet-${i + 1}`, cx: random(width) + radius, cy: random(height) + radius, radius, vel: makeVelocity(PET_VELOCITY) });
     }
 };
 

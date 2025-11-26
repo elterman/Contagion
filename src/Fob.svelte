@@ -1,9 +1,9 @@
 <script>
+	import { random } from 'lodash-es';
 	import { fade } from 'svelte/transition';
+	import { DEAD_MS, TICK_MS, ZET_VELOCITY_DELTA } from './const';
 	import { ss } from './state.svelte';
 	import { isZet } from './utils';
-	import { random } from 'lodash-es';
-	import { ZET_VELOCITY_DELTA } from './const';
 
 	const { fob, src, scale = 1 } = $props();
 	const { cx, cy, radius } = $derived(fob);
@@ -34,19 +34,28 @@
 				<div class="vel" style="width: ${w}px; translate: 0 {(y > 0 ? off : -off) * 1.1}px;">{_y}</div>
 			{/if}
 		{/if}
-		{#each [1, 2, 3, 4, 5, 6] as i}
-			{@const threshold = i * ZET_VELOCITY_DELTA * ss.scale}
-			{@const w = radius * 1 * (1 - i * 0.05)}
-			{@const off = 4 * (i + 1)}
-			{#if Math.abs(x).toFixed(1) >= threshold}
-				{@const cls = x < 0 ? 'wave-x-r' : 'wave-x-l'}
-				<div class={cls} style="width: {w}px; translate: {off * (x < 0 ? 1 : -1)}px 0;"></div>
-			{/if}
-			{#if Math.abs(y).toFixed(1) >= threshold}
-				{@const cls = y < 0 ? 'wave-y-b' : 'wave-y-t'}
-				<div class={cls} style="width: {w}px; translate: 0 {off * (y < 0 ? 1 : -1)}px;"></div>
-			{/if}
-		{/each}
+		{#if !ss.over}
+			{#each [1, 2, 3, 4, 5, 6] as i}
+				{@const threshold = i * ZET_VELOCITY_DELTA * ss.scale}
+				{@const w = radius * 1 * (1 - i * 0.05)}
+				{@const off = 4 * (i + 1)}
+				{#if Math.abs(x).toFixed(1) >= threshold}
+					{@const cls = x < 0 ? 'wave-x-r' : 'wave-x-l'}
+					<div class={cls} style="width: {w}px; translate: {off * (x < 0 ? 1 : -1)}px 0;"></div>
+				{/if}
+				{#if Math.abs(y).toFixed(1) >= threshold}
+					{@const cls = y < 0 ? 'wave-y-b' : 'wave-y-t'}
+					<div class={cls} style="width: {w}px; translate: 0 {off * (y < 0 ? 1 : -1)}px;"></div>
+				{/if}
+			{/each}
+		{/if}
+	{:else if fob.dead && false}
+		{@const secs = Math.round((DEAD_MS - (ss.ticks - fob.dead) * TICK_MS) / 1000)}
+		{#if secs > 0}
+			<div class="secs">
+				{secs}
+			</div>
+		{/if}
 	{/if}
 </div>
 
@@ -120,6 +129,20 @@
 			-1px 1px black;
 		display: grid;
 		place-content: center;
+	}
+
+	.secs {
+		grid-area: 1/1;
+		place-self: start;
+		font-size: 18px;
+		text-shadow:
+			1px 1px black,
+			1px -1px black,
+			-1px -1px black,
+			-1px 1px black;
+		display: grid;
+		color: gold;
+		font-weight: bold;
 	}
 
 	.wave-x-l,

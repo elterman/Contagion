@@ -5,12 +5,12 @@
 
 <div class="stats" style="font-size: {Math.min(20, 22 * Math.min(ss.scale, 1))}px;">
 	<div class="item">
-		<span class="label">last streak</span>
-		<div class="flow"><Timer ticks={_stats.last_streak} /></div>
+		<span class="label">plays</span>
+		<div class="flow">{_stats.plays}</div>
 	</div>
 	<div class="item">
-		<span class="label">longest streak</span>
-		<div class="flow gold"><Timer ticks={_stats.best_streak} /></div>
+		<span class="label">best</span>
+		<div class="flow gold"><Timer ticks={_stats.best_ticks || ''} /></div>
 	</div>
 </div>
 

@@ -11,12 +11,12 @@
 {#if !ss.dlg}
 	<div class="info-panel" style="font-size: {fsz}px;">
 		<div class="label" style="font-size: {lsz}px;">live kittens</div>
-		<div class="num {ss.streak_ticks ? 'live' : ''}">
+		<div class="num">
 			<NumberFlow value={liveCount()} />
 		</div>
 		<div></div>
-		<div class="label" style="font-size: {lsz}px;">plague-free streak</div>
-		<div class="timer {ss.streak_ticks ? 'live' : ''}"><Timer ticks={ss.streak_ticks} /></div>
+		<div class="label" style="font-size: {lsz}px;">{ss.over ? 'total contagion in' : 'mission duration'}</div>
+		<div class="timer"><Timer ticks={ss.ticks} /></div>
 	</div>
 {/if}
 
@@ -39,9 +39,6 @@
 	.timer,
 	.num {
 		font-family: Radhiumz;
-	}
-
-	.live {
 		color: var(--green);
 	}
 </style>

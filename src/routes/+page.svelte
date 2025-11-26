@@ -39,8 +39,7 @@
 		_sound.play('link1', { rate: 0.7 });
 
 		_stats.plays = ss.timer ? 1 : 0;
-		_stats.best_streak = 0;
-		_stats.last_streak = 0;
+		_stats.best_ticks = 0;
 
 		persist();
 	};
@@ -77,7 +76,6 @@
 		if (ss.over && e.code === 'Space') {
 			_sound.play('plop');
 			ss.restart = true;
-			delete ss.velocity;
 			ss.ticks = 0;
 
 			post(onStart, 1000);
@@ -100,7 +98,7 @@
 		const max = ZET_MAX_VELOCITY * ss.scale;
 		const d = ZET_VELOCITY_DELTA * ss.scale;
 
-		switch (e.key) {
+		switch (e.code) {
 			default:
 				return;
 			case 'ArrowRight':
@@ -118,6 +116,10 @@
 			case 'ArrowDown':
 				y += d;
 				y = Math.max(-max, Math.min(y, max));
+				break;
+			case 'Space':
+				x = 0;
+				y = 0;
 				break;
 		}
 

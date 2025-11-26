@@ -11,13 +11,14 @@
 	const lightblue = '<span style="color: var(--lightblue);">';
 
 	const CONTENT = `
-        <span style='font-style: italic;'>You are a ${green}self-conscious alien</span>, burdened with a dangerous ${orange}virus</span>. You drift through space, trying ${green}not to infect</span> the innocent.</span>
+        <span style='font-style: italic;'>You are an ${green}evil alien</span>, carrying a dangerous ${orange}virus</span>. You drift through space, hunting the innocent.</span>
         ${ul}
-        ${li}${blue}Use ${lightblue}arrow keys</span> to adjust your ${lightblue}velocity</span>—horizontal and vertical.</span></span></li>
-        ${li}${blue}Contact with a ${gold}cute kitten</span> turns it into a ${orange}zombie</span>.</span></span></li>
-        ${li}${blue}Zombie kittens ${green}spread</span> the plague.</span></span></li>
-        ${li}${blue}After a short time, zombie kittens ${gold}revive</span> and can be ${green}infected again</span>.</span></span></li>
-        ${li}${blue}Keep ${lightblue}all of them</span> alive ${lightblue}at the same time</span>—for as long as possible.</span></span></li>
+        ${li}${blue}Use ${lightblue}arrow keys</span> to adjust your ${lightblue}velocity</span>—horizontal and vertical.</span></li>
+        ${li}${blue}Press ${lightblue}SPACE</span> to ${lightblue}stop</span> instantly.</span></li>
+        ${li}${blue}Contact with a ${gold}cute kitten</span> turns it into a ${orange}zombie</span>.</span></li>
+        ${li}${blue}After some time, zombie kittens ${gold}revive</span> and can be ${green}infected again</span>.</span></li>
+        ${li}${blue}Zombie kittens ${green}spread</span> the plague.</span></li>
+        ${li}${blue}Your evil mission is complete when ${lightblue}all the kittens</span> are infected ${lightblue}simultaneously</span>.</span></li>
         </ul>`;
 
 	const width = $derived(ss.space?.width > 580 ? '540px' : '80%');

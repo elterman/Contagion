@@ -5,7 +5,6 @@ import { post } from './utils';
 export const ss = $state({
     fobs: [],
     dlg: true,
-    streak_ticks: 0,
 });
 
 export const _prompt = $state({
@@ -42,6 +41,5 @@ export const _prompt = $state({
 
 export const _stats = $state({
     plays: 0,
-    last_streak: 0,
-    best_streak: 0,
+    best_ticks: 0,
 });

@@ -1,5 +1,5 @@
 <script>
-	import src from '$lib/images/Zet.webp';
+	import src from '$lib/images/Evil Zet.webp';
 	import Fob from './Fob.svelte';
 	import { findZet } from './shared.svelte';
 
