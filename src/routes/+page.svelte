@@ -7,6 +7,8 @@
 	import { _stats, ss } from '../state.svelte';
 	import { post, windowSize } from '../utils';
 
+	const keysPressed = new Set();
+
 	const onSound = () => {
 		_sound.sfx = !_sound.sfx;
 
@@ -44,7 +46,16 @@
 		persist();
 	};
 
+	const onKeyUp = (e) => {
+		keysPressed.delete(e.key);
+	};
+
 	const onKeyDown = (e) => {
+		if (keysPressed.has(e.key)) {
+			return; // Already processing this key}
+		}
+
+		keysPressed.add(e.key);
 		if (e.key === 's') {
 			onSound();
 			return;
@@ -134,12 +145,14 @@
 		window.addEventListener('contextmenu', disable);
 		window.addEventListener('dblclick', disable);
 		window.addEventListener('keydown', onKeyDown);
+		window.addEventListener('keyup', onKeyUp);
 
 		return () => {
 			document.removeEventListener('touchstart', disable, { passive: false });
 			window.removeEventListener('contextmenu', disable);
 			window.removeEventListener('dblclick', disable);
 			window.removeEventListener('keydown', onKeyDown);
+			window.addEventListener('keyup', onKeyUp);
 		};
 	});
 
