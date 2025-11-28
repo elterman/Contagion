@@ -57,6 +57,7 @@
 		box-sizing: border-box;
 		aspect-ratio: 1;
 		place-self: start;
+		transition: width 1s, height 1s;
 	}
 
 	.shakeable {

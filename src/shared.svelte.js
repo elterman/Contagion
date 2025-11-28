@@ -197,6 +197,14 @@ const onTick = () => {
                 }
 
                 ss.streak_ticks = 0;
+
+                if (ss.level > 1) {
+                    post(() => {
+                        for (const f of ss.fobs) {
+                            f.radius = (isZet(f) ? ZET_RADIUS : PET_RADIUS) * ss.scale;
+                        }
+                    });
+                }
             }
 
             const { v1, v2 } = handleCollision(fob1, fob2);
@@ -276,7 +284,7 @@ const addPets = () => {
 
     const width = ss.space.width - radius * 2;
     const height = ss.space.height - radius * 2;
-    const m = ss.ticks ? 1  : 0.1;
+    const m = ss.ticks ? 0.5 : 0.1;
 
     for (let i = 0; i < PET_COUNT; i++) {
         ss.fobs.push({ id: `pet-${i + 1}`, lives: 9, cx: random(width) + radius, cy: random(height) + radius, radius, vel: makeVelocity(PET_VELOCITY * m) });
