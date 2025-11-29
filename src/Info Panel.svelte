@@ -11,12 +11,12 @@
 {#if !ss.dlg}
 	<div class="info-panel {ss.over ? 'over' : ''}" style="font-size: {fsz}px;">
 		<div class="label" style="font-size: {lsz}px;">live kittens</div>
-		<div class="num">
+		<div class="num {ss.over ? 'green' : ''}">
 			<NumberFlow value={liveCount()} />
 		</div>
 		<div></div>
 		<div class="label" style="font-size: {lsz}px;">{ss.over ? 'total contagion in' : 'mission duration'}</div>
-		<div class="timer"><Timer ticks={ss.ticks} /></div>
+		<div class="timer {ss.over ? 'green' : ''}"><Timer ticks={ss.over ?? ss.ticks} /></div>
 	</div>
 {/if}
 
@@ -44,6 +44,9 @@
 	.timer,
 	.num {
 		font-family: Radhiumz;
+	}
+
+	.green {
 		color: var(--green);
 	}
 </style>

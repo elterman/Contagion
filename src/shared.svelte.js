@@ -76,11 +76,11 @@ const hitEdge = (fob) => {
 };
 
 const onOver = () => {
-    ss.over = true;
+    ss.over = ss.ticks;
 
     _sound.play('lost');
-    clearInterval(ss.timer);
-    delete ss.timer;
+    // clearInterval(ss.timer);
+    // delete ss.timer;
 
     if (_stats.best_ticks === 0 || ss.ticks < _stats.best_ticks) {
         _stats.best_ticks = ss.ticks;
@@ -96,7 +96,7 @@ const onTick = () => {
 
     ss.ticks += 1;
 
-    if (liveCount() === 0) {
+    if (!ss.over && liveCount() === 0) {
         onOver();
         return;
     }
@@ -112,7 +112,7 @@ const onTick = () => {
             fob.cx += fob.vel.x;
             fob.cy += fob.vel.y;
 
-            if (isNumber(fob.dead) && ((ss.ticks - fob.dead) * TICK_MS) >= DEAD_MS) {
+            if (!ss.over && isNumber(fob.dead) && ((ss.ticks - fob.dead) * TICK_MS) >= DEAD_MS) {
                 shake(fob);
                 delete fob.dead;
                 _sound.play('won', { rate: liveCount() < PET_COUNT ? 4 : 1 });

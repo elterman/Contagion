@@ -103,6 +103,10 @@
 			return;
 		}
 
+		if (ss.over) {
+			return;
+		}
+
 		const zet = findZet();
 		let { x, y } = zet.vel;
 
@@ -128,10 +132,10 @@
 				y += d;
 				y = Math.max(-max, Math.min(y, max));
 				break;
-			case 'Space':
-				x = 0;
-				y = 0;
-				break;
+			// case 'Space':
+			// 	x = 0;
+			// 	y = 0;
+			// 	break;
 		}
 
 		zet.vel = { x, y };
@@ -188,7 +192,7 @@
 	post(() => (splash = false), 2000);
 </script>
 
-<div class="app pulse">
+<div class="app pulse {ss.over ? 'over' : ''}">
 	<GamePage />
 	{#if splash}
 		<Splash />
@@ -208,6 +212,11 @@
 		background-image: url('$lib/images/Sky.jpg');
 		background-position-x: center;
 		background-position-y: center;
+		transition: background-image 2s;
+	}
+
+	.over {
+		background-image: url('$lib/images/Sky Over.jpg');
 	}
 
 	.pulse {
