@@ -41,9 +41,8 @@
 		_sound.play('link1', { rate: 0.7 });
 
 		_stats.plays = ss.timer ? 1 : 0;
+		_stats.total_ticks = ss.ticks || 0;
 		_stats.best_ticks = 0;
-
-		persist();
 	};
 
 	const onKeyUp = (e) => {

@@ -49,7 +49,6 @@ export const onStart = () => {
     ss.timer = setInterval(onTick, TICK_MS);
 
     _stats.plays += 1;
-    persist();
 };
 
 const hitEdge = (fob) => {
@@ -79,12 +78,10 @@ const onOver = () => {
     ss.over = ss.ticks;
 
     _sound.play('lost');
-    // clearInterval(ss.timer);
-    // delete ss.timer;
+    post(() => _sound.play('link1', { rate: 0.5 }), 200);
 
     if (_stats.best_ticks === 0 || ss.ticks < _stats.best_ticks) {
         _stats.best_ticks = ss.ticks;
-        persist();
     }
 
 };
@@ -95,6 +92,10 @@ const onTick = () => {
     }
 
     ss.ticks += 1;
+
+    if (!ss.over) {
+        _stats.total_ticks += 1;
+    }
 
     if (!ss.over && liveCount() === 0) {
         onOver();
@@ -193,7 +194,7 @@ export const showDialog = (value, plop = true) => {
 };
 
 export const persist = () => {
-    let json = { ..._sound, ..._stats };
+    let json = { ..._sound };
     localStorage.setItem(APP_KEY, JSON.stringify(json));
 };
 
@@ -204,11 +205,6 @@ export const loadGame = () => {
     if (job) {
         _sound.sfx = job.sfx;
         _sound.music = job.music;
-        _stats.plays = job.plays;
-        _stats.best_ticks = job.best_ticks;
-    } else {
-        _stats.plays = 0;
-        _stats.best_ticks = 0;
     }
 };
 
