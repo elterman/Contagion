@@ -12,7 +12,7 @@
 	const lightblue = '<span style="color: var(--lightblue);">';
 
 	const INTRO = `
-        <span style='font-style: italic;'>You are a ${green}self-conscious alien</span>, burdened with a dangerous ${orange}virus</span>. You drift through space, trying ${lightblue}NOT TO INFECT</span> the innocent—yet unwillingly spreading ${orange}waves of infection</span>.</span>
+        <span style='font-style: italic;'>You are a ${green}self-conscious alien</span>, burdened with a dangerous ${green}virus</span>. You drift through space, trying ${orange}NOT TO INFECT</span> the innocent—yet unwillingly spreading ${orange}waves of infection</span>.</span>
         ${ul}
         ${li}${blue}Use ${lightblue}arrow keys</span> to adjust your ${lightblue}velocity</span>.</span></li>
         ${li}${blue}Contact with a ${gold}cute kitten</span> turns it into a ${orange}zombie</span>.</span></li>

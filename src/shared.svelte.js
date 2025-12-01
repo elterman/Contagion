@@ -99,7 +99,7 @@ const onTick = () => {
     if (liveCount() === PET_COUNT) {
         ss.streak_ticks += 1;
 
-        if (ss.streak_ticks > _stats.best_streak) {
+        if (!_stats.best_streak || ss.streak_ticks > _stats.best_streak) {
             _stats.best_streak = ss.streak_ticks;
             persist();
         }
@@ -282,7 +282,7 @@ const addPets = () => {
 
     const width = ss.space.width - radius * 2;
     const height = ss.space.height - radius * 2;
-    const m = ss.ticks ? 0.5 : 0.1;
+    const m = ss.ticks ? 0.5 : 0.5;
 
     for (let i = 0; i < PET_COUNT; i++) {
         ss.fobs.push({ id: `pet-${i + 1}`, lives: 9, cx: random(width) + radius, cy: random(height) + radius, radius, vel: makeVelocity(PET_VELOCITY * m) });
